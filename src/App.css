@@ -27,7 +27,10 @@ body{
 }
 #initial{
     transform: scale(1,1);
-    animation: move 0.5s 1.5s forwards ease-in-out ;
+    animation: move 0.5s 2s forwards ease-in-out ;
+}
+#initial span{
+    display: block;
 }
 @keyframes move{
     0%{

@@ -9,6 +9,7 @@ document.head.append(highlightStyles);
 const whiteSquareGrey = 'rgb(240,217,181)';
 const blackSquareGrey = 'gray';
 
+
 function App() {
   const [fen,setFen]=useState("start");
 
@@ -102,7 +103,9 @@ function App() {
   return (
     <div className="App">
       <button onClick={reset}>New Game</button>
-      <div id="initial"><span>White Moves First</span></div>
+      <div id="initial">
+        <span>White Moves First. To move a Piece, Drag it.</span>
+      </div>
       {
         game.current && game.current.game_over() ?
         alert("Game Over"):<span></span>
