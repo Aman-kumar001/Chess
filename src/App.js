@@ -102,6 +102,7 @@ function App() {
   return (
     <div className="App">
       <button onClick={reset}>New Game</button>
+      <div id="initial"><span>White Moves First</span></div>
       {
         game.current && game.current.game_over() ?
         alert("Game Over"):<span></span>

@@ -25,3 +25,15 @@ body{
 .App button:hover{
     background-color: rgb(192, 154, 141);
 }
+#initial{
+    transform: scale(1,1);
+    animation: move 0.5s 1.5s forwards ease-in-out ;
+}
+@keyframes move{
+    0%{
+        transform: scale(1,1);
+    }
+    100%{
+        transform: scale(1,0);
+    }
+}
