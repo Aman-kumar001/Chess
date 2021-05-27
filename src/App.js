@@ -4,13 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import $ from 'jquery';
 
-const highlightStyles = document.createElement('style');
-document.head.append(highlightStyles);
-const whiteSquareGrey = 'rgb(240,217,181)';
-const blackSquareGrey = 'gray';
-
-
 function App() {
+  const [turn,setTurn]=useState("white")
   const [fen,setFen]=useState("start");
 
   let game = useRef(null);
@@ -23,12 +18,18 @@ function App() {
     onMouseoutSquare(sourceSquare);
     let move=game.current.move({
       from: sourceSquare,
-      to: targetSquare
+      to: targetSquare,
+      promotion: 'q'    //used queen to for promotion for simplicity
     })
     // console.log(move)
     if(move===null)return null; //checks illegal moves
     setFen(game.current.fen())
 
+    // update turn
+    if(turn=="white"){
+      setTurn("black")
+    }
+    else setTurn("white")
   }
 
 
@@ -43,12 +44,8 @@ function App() {
   const greySquare = (square)=> {
     // console.log(highlightStyles)
     console.log(square)
-    // const highlightColor = (square.charCodeAt(0) % 2) ^ (square.charCodeAt(1) % 2)
-    //   ? whiteSquareGrey
-    //   : blackSquareGrey;
-    // console.log(highlightColor)
     var str='[data-squareid=' + square +']'
-    $(str).css("background-color","rgba(255, 255, 0, 0.5")
+    $(str).css("boxShadow","inset 0 0 1px 4px rgba(0,0,255,0.7)")
   };
 
   const onMouseoverSquare=(square,piece)=>{
@@ -80,37 +77,39 @@ function App() {
   }
   };
   const removeGreySquares=(square)=>{
-    const highlightColor = (square.charCodeAt(0) % 2) ^ (square.charCodeAt(1) % 2)
-      ? whiteSquareGrey
-      : blackSquareGrey;
-    // console.log(highlightColor)
     var str='[data-squareid=' + square +']'
-    $(str).css("background-color",highlightColor)
+    $(str).css("boxShadow","")
   }
   
   const onDragStart= (source, piece)=>{
     // do not pick up pieces if the game is over
-    if (game.game_over()) return false
+    if (game.current.game_over()) return false
 
     // or if it's not that side's turn
-    if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
-        (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+    if ((game.current.turn() === 'w' && piece.search(/^b/) !== -1) ||
+        (game.current.turn() === 'b' && piece.search(/^w/) !== -1)) {
       return false
     }
+    else return true;
   }
+  console.log(turn)
   /////////////////////////////////////
 
   return (
     <div className="App">
-      <button onClick={reset}>New Game</button>
-      <div id="initial">
-        <span>White Moves First. To move a Piece, Drag it.</span>
-      </div>
+      
+        <div className="container">
+        <div className="turn">
+          <div className="chance" style={{backgroundColor:turn,color:(turn=="white"?"black":"white")}}>
+            <h2>Player to Move</h2>
+          </div>
+          <button onClick={reset}>New Game</button>
+        </div>
+        
       {
         game.current && game.current.game_over() ?
         alert("Game Over"):<span></span>
       }
-        <div className="container">
           <Chessboard
           darkSquareStyle={{backgroundColor:"gray"}}
           dropSquareStyle={{boxShadow: 'inset 0 0 1px 4px black'}}
