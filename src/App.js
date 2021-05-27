@@ -37,6 +37,7 @@ function App() {
     game.current.clear();
     game.current.reset();
     setFen("start")
+    setTurn("white")
   }
 
   /////////////////////////////////////
