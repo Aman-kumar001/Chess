@@ -14,6 +14,7 @@ function App() {
     game.current = new Chess();
   },[])
 
+
   const onDrop=({sourceSquare,targetSquare})=>{
     onMouseoutSquare(sourceSquare);
     let move=game.current.move({
@@ -109,7 +110,7 @@ function App() {
         
       {
         game.current && game.current.game_over() ?
-        alert("Game Over"):<span></span>
+        alert("Game Over!! CheckMate"):<span></span>
       }
           <Chessboard
           darkSquareStyle={{backgroundColor:"gray"}}
