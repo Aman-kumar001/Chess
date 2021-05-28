@@ -69,5 +69,5 @@ h2{
     left:13%;
     z-index: -2;
     height:150px;
-    transform: rotateZ(95deg);
+    transform: rotateZ(95deg) rotateX(30deg);
 }

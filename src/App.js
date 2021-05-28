@@ -108,8 +108,8 @@ function App() {
 
         <div className="container">
         <div className="turn">
-          <div className="chance" style={{backgroundColor:turn,color:(turn=="white"?"black":"white")}}>
-            <h2>Player to Move</h2>
+          <div className="chance" style={{backgroundColor:"gray",color:(turn=="white"?"white":"black")}}>
+            {turn=="white"? <h2>White's turn</h2>:<h2>Black's turn</h2>}
           </div>
           <button onClick={reset}>New Game</button>
         </div>
