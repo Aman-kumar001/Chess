@@ -3,6 +3,9 @@ import Chessboard from 'chessboardjsx';
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import $ from 'jquery';
+import pic1 from './images/pic1.svg'
+import pic2 from './images/pic2.svg'
+import pic3 from './images/pic3.svg'
 
 function App() {
   const [turn,setTurn]=useState("white")
@@ -47,7 +50,7 @@ function App() {
     // console.log(highlightStyles)
     console.log(square)
     var str='[data-squareid=' + square +']'
-    $(str).css("boxShadow","inset 0 0 1px 4px rgba(0,0,255,0.7)")
+    $(str).css("boxShadow",turn=="black"?"inset 0 0 1px 4px black":"inset 0 0 1px 6px white")
   };
 
   const onMouseoverSquare=(square,piece)=>{
@@ -99,7 +102,10 @@ function App() {
 
   return (
     <div className="App">
-      
+      <img src={pic1} alt="" className="pawn"/>
+      <img src={pic2} alt="" className="king"/>
+      <img src={pic3} alt="" className="knight"/>
+
         <div className="container">
         <div className="turn">
           <div className="chance" style={{backgroundColor:turn,color:(turn=="white"?"black":"white")}}>
